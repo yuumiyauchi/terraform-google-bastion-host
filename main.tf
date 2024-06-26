@@ -37,7 +37,7 @@ locals {
 
 resource "google_service_account" "bastion_host" {
   count        = var.service_account_email == "" ? 1 : 0
-  project      = var.project
+#  project      = var.project
   account_id   = var.service_account_name
   display_name = "Service Account for Bastion"
 }
@@ -47,12 +47,12 @@ module "instance_template" {
   version = "~> 11.0"
 
   name_prefix         = var.name_prefix
-  project_id          = var.project
+ # project_id          = var.project
   machine_type        = var.machine_type
   disk_size_gb        = var.disk_size_gb
   disk_type           = var.disk_type
   disk_labels         = var.disk_labels
-  subnetwork          = var.subnet
+ # subnetwork          = var.subnet
   subnetwork_project  = var.host_project
   additional_networks = var.additional_networks
   region              = var.region
@@ -100,10 +100,10 @@ module "iap_tunneling" {
   source = "./modules/iap-tunneling"
 
   host_project               = var.host_project
-  project                    = var.project
+  #project                    = var.project
   additional_ports           = var.additional_ports
   fw_name_allow_ssh_from_iap = var.fw_name_allow_ssh_from_iap
-  network                    = var.network
+#  network                    = var.network
   service_accounts           = [local.service_account_email]
   instances = var.create_instance_from_template ? [{
     name = try(google_compute_instance_from_template.bastion_vm[0].name, "")
@@ -133,7 +133,7 @@ resource "google_project_iam_member" "bastion_sa_bindings" {
 # predefined roles grant additional permissions that aren't needed
 resource "google_project_iam_custom_role" "compute_os_login_viewer" {
   count       = var.service_account_email == "" ? 1 : 0
-  project     = var.project
+#  project     = var.project
   role_id     = local.temp_role_id
   title       = "OS Login Project Get Role"
   description = "From Terraform: iap-bastion module custom role for more fine grained scoping of permissions"
