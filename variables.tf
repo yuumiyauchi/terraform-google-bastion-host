@@ -82,27 +82,20 @@ variable "name_prefix" {
   description = "Name prefix for instance template"
   default     = "bastion-instance-template"
 }
-variable "network" {
-  type = list(string)
 
-  description = "Network tags, provided as a list"
-  default     = []
+#variable "network" {
 #  type = string
 #
 #  description = "Self link for the network on which the Bastion should live"
 #　default     = "my-default-project-id"
-}
+#}
 
-variable "project" {
-  type = list(string)
-
-  description = "Network tags, provided as a list"
-  default     = []
+#variable "project" {
 #　type = string
 #
 #  description = "The project ID to deploy to"
 #　default     = "my-default-project-id"
-}
+#}
 
 variable "host_project" {
   type = string
@@ -164,17 +157,12 @@ variable "startup_script" {
   default     = ""
 }
 
-variable "subnet" {
-  type = list(string)
+#variable "subnet" {
+#  type = string
 
-  description = "Network tags, provided as a list"
-  default     = []
-
-# type = string
-#
 #  description = "Self link for the subnet on which the Bastion should live. Can be private when using IAP"
 #　default     = "my-default-project-id"
-}
+#}
 
 variable "zone" {
   type = string
