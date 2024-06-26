@@ -86,14 +86,14 @@ variable "network" {
   type = string
 
   description = "Self link for the network on which the Bastion should live"
-　default     = ""
+　default     = "192.168.30.15/24"
 }
 
 variable "project" {
   type = string
 
   description = "The project ID to deploy to"
-　default     = ""
+　default     = "default"
 }
 
 variable "host_project" {
@@ -160,7 +160,7 @@ variable "subnet" {
   type = string
 
   description = "Self link for the subnet on which the Bastion should live. Can be private when using IAP"
-　default     = ""
+　default     = "default"
 }
 
 variable "zone" {
